@@ -13,6 +13,15 @@ from scipy.stats import ttest_ind
 from matplotlib import colormaps
 import streamlit as st
 
+
+""" 
+
+Data chosen from this dataset https://www.kaggle.com/datasets/daniaherzalla/radio-frequency-jamming
+csv's were selected based off of active or passive scans in the RF spectrum, each corresponding with varying scenarios
+Scenarios include the amount of power being used (dBm), different locations, and active / passive scans
+
+"""
+
 # Active jamming data
 jamming_1 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_10dbm_gaussiannoise_1.csv')
 jamming_2 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_0dbm_gaussiannoise_28.csv')
@@ -49,7 +58,7 @@ def visualize_examples():
 
 visualize_examples()
 
-# Logistic regrression model with visualizations
+# Logistic regression model with visualizations
 def active_prediction_model():
     
     benign = pd.concat([benign_1, benign_2, benign_3], ignore_index=True)
@@ -83,7 +92,13 @@ def active_prediction_model():
     plt.title('Confusion Matrix of Active Scans')
     plt.show()
 
-active_prediction_model()
+    accuracy = accuracy_score(y_test, combined_y_pred)
+    precision = precision_score(y_test, combined_y_pred)
+    recall = recall_score(y_test, combined_y_pred)
+    f1 = f1_score(y_test, combined_y_pred)
+
+    return accuracy, precision, recall, f1
+
 
 # Same model as above, just for passive scans
 def passive_prediction_model():
@@ -120,9 +135,50 @@ def passive_prediction_model():
     plt.title('Confusion Matrix of Passive Scans')
     plt.show()
 
-passive_prediction_model()
+    accuracy_passive = accuracy_score(y_test_passive, passive_y_pred)
+    precision_passive = precision_score(y_test_passive, passive_y_pred)
+    recall_passive = recall_score(y_test_passive, passive_y_pred)
+    f1_passive = f1_score(y_test_passive, passive_y_pred)
+
+    return accuracy_passive, precision_passive, recall_passive, f1_passive
 
 
+active_metrics = active_prediction_model()
+passive_metrics = passive_prediction_model()
 
+# Print metrics
+print("Active Metrics:")
+print(f"Accuracy: {active_metrics[0]: }")
+print(f"Precision: {active_metrics[1]: }")
+print(f"Recall: {active_metrics[2]: }")
+print(f"F1 Score: {active_metrics[3]: }")
 
+print("\nPassive Metrics:")
+print(f"Accuracy: {passive_metrics[0]: }")
+print(f"Precision: {passive_metrics[1]: }")
+print(f"Recall: {passive_metrics[2]: }")
+print(f"F1 Score: {passive_metrics[3]: }")
 
+'''active_accuracy = active_metrics[0]
+passive_accuracy = passive_metrics[0]
+
+active_precision = active_metrics[1]
+passive_precision = passive_metrics[1]
+
+active_recall = active_metrics[2]
+passive_recall = passive_metrics[2]
+
+active_f1 = active_metrics[3]
+passive_f1 = passive_metrics[3]
+
+def perform_t_test(metric_active, metric_passive, metric_name):
+    t_stat, p_value = ttest_ind(metric_active, metric_passive, equal_var=False)
+    print(f"P-Value ({metric_name}): {p_value:.4f}")
+
+# Perform t-tests for each metric
+print("T-Tests Results:")
+perform_t_test(active_accuracy, passive_accuracy, "Accuracy")
+perform_t_test(active_precision, passive_precision, "Precision")
+perform_t_test(active_recall, passive_recall, "Recall")
+perform_t_test(active_f1, passive_f1, "F1 Score") 
+'''
