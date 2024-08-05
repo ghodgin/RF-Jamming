@@ -1,6 +1,6 @@
 # Predicting and classifying malicious RF signals
 
-![rf signals gif](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.compasseur.com%2F&psig=AOvVaw2jQpP677-OzF-Iwrh-9z9T&ust=1722970405104000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIjg_47D3ocDFQAAAAAdAAAAABBF)
+![rf signals gif](https://www.compasseur.com/wp-content/uploads/2023/06/3_livecheck.gif)
 
 ## Table of contents
 1. [Overview](#overview)
