@@ -13,14 +13,9 @@ from scipy.stats import ttest_ind
 from matplotlib import colormaps
 import streamlit as st
 
-
-""" 
-
-Data chosen from this dataset https://www.kaggle.com/datasets/daniaherzalla/radio-frequency-jamming
-csv's were selected based off of active or passive scans in the RF spectrum, each corresponding with varying scenarios
-Scenarios include the amount of power being used (dBm), different locations, and active / passive scans
-
-"""
+def main():
+    st.title('RF Spectrum Analyzer')
+    st.write("Hello streamlit")
 
 # Active jamming data
 jamming_1 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_10dbm_gaussiannoise_1.csv')
@@ -159,26 +154,8 @@ print(f"Precision: {passive_metrics[1]: }")
 print(f"Recall: {passive_metrics[2]: }")
 print(f"F1 Score: {passive_metrics[3]: }")
 
-'''active_accuracy = active_metrics[0]
-passive_accuracy = passive_metrics[0]
 
-active_precision = active_metrics[1]
-passive_precision = passive_metrics[1]
 
-active_recall = active_metrics[2]
-passive_recall = passive_metrics[2]
 
-active_f1 = active_metrics[3]
-passive_f1 = passive_metrics[3]
-
-def perform_t_test(metric_active, metric_passive, metric_name):
-    t_stat, p_value = ttest_ind(metric_active, metric_passive, equal_var=False)
-    print(f"P-Value ({metric_name}): {p_value:.4f}")
-
-# Perform t-tests for each metric
-print("T-Tests Results:")
-perform_t_test(active_accuracy, passive_accuracy, "Accuracy")
-perform_t_test(active_precision, passive_precision, "Precision")
-perform_t_test(active_recall, passive_recall, "Recall")
-perform_t_test(active_f1, passive_f1, "F1 Score") 
-'''
+if __name__ == "__main__":
+    main()
