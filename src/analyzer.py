@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -7,13 +6,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-import matplotlib.pyplot as plt
 from scipy.stats import stats
 from scipy.stats import ttest_ind
 from matplotlib import colormaps
 import streamlit as st
 
-def main():
+def streamlit_app():
     st.title('RF Spectrum Analyzer')
     st.write("Hello streamlit")
 
@@ -155,7 +153,5 @@ print(f"Recall: {passive_metrics[2]: }")
 print(f"F1 Score: {passive_metrics[3]: }")
 
 
-
-
 if __name__ == "__main__":
-    main()
+    streamlit_app()
