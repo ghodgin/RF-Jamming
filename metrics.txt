@@ -9,3 +9,9 @@ Accuracy:  0.904656862745098
 Precision:  0.902867715078631
 Recall:  0.9160018770530267
 F1 Score:  0.9093873747961797
+
+Active RSSI T-Statistic: -373.3301409744007
+Active RSSI P-Value: 0.0
+
+Passive RSSI T-Statistic: -57.16301338058486
+Passive RSSI T-Statistic: 0.0

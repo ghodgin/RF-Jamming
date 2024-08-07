@@ -1,16 +1,14 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from scipy.stats import stats
-from scipy.stats import ttest_ind
-from matplotlib import colormaps
+from scipy import stats
 import streamlit as st
 
+# Streamlit application
 def streamlit_app():
 
     st.sidebar.title("Table of contents")
@@ -49,27 +47,23 @@ def streamlit_app():
     st.write('## Conclusion')
     st.write('After analyzing the metrics from the prediction model, I would reject the null hypothesis. It is easier to detect Active jamming in real world conditions, compared to Passive jamming techniques. This means that if someone wanted to maliciously attack a frequency, they would be better off focusing their efforts into passive methods. This also suggests that people who are looking for disturbances on their own frequencies, that a good first step would be to look out for any passive scans on the same frequency.')
 
-    
-
-
 # Active jamming data
+jamming_1 = pd.read_csv('data/active-gaussian-jamming/5805mhz_jamming_10dbm_gaussiannoise_1.csv')
+jamming_2 = pd.read_csv('data/active-gaussian-jamming/5805mhz_jamming_0dbm_gaussiannoise_28.csv')
+jamming_3 = pd.read_csv('data/active-gaussian-jamming/5805mhz_jamming_neg10dbm_gaussiannoise_9.csv')
 
-jamming_1 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_10dbm_gaussiannoise_1.csv')
-jamming_2 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_0dbm_gaussiannoise_28.csv')
-jamming_3 = pd.read_csv('active-gaussian-jamming/5805mhz_jamming_neg10dbm_gaussiannoise_9.csv')
-
-benign_1 = pd.read_csv('active-benign-background/5ghz_activescan_background_loc1_1.csv')
-benign_2 = pd.read_csv('active-benign-background/5ghz_activescan_background_loc2_35.csv')
-benign_3 = pd.read_csv('active-benign-background/5ghz_activescan_floor_32.csv')
+benign_1 = pd.read_csv('data/active-benign-background/5ghz_activescan_background_loc1_1.csv')
+benign_2 = pd.read_csv('data/active-benign-background/5ghz_activescan_background_loc2_35.csv')
+benign_3 = pd.read_csv('data/active-benign-background/5ghz_activescan_floor_32.csv')
 
 # Passive jamming data
-passive_benign1 = pd.read_csv('passive-benign-background/2.4ghz_passivescan_background_loc1_2.csv')
-passive_benign2 = pd.read_csv('passive-benign-background/2.4ghz_passivescan_background_loc1_18.csv')
-passive_benign_3 = pd.read_csv('passive-benign-background/2.4ghz_passivescan_background_loc1_27.csv')
+passive_benign1 = pd.read_csv('data/passive-benign-background/2.4ghz_passivescan_background_loc1_2.csv')
+passive_benign2 = pd.read_csv('data/passive-benign-background/2.4ghz_passivescan_background_loc1_18.csv')
+passive_benign_3 = pd.read_csv('data/passive-benign-background/2.4ghz_passivescan_background_loc1_27.csv')
 
-passive_jamming1 = pd.read_csv('passive-gaussian-jamming/2412mhz_jamming_12dbm_gaussiannoise_1.csv')
-passive_jamming2 = pd.read_csv('passive-gaussian-jamming/2412mhz_jamming_9dbm_gaussiannoise_6.csv')
-passive_jamming3 = pd.read_csv('passive-gaussian-jamming/2412mhz_jamming_6dbm_gaussiannoise_13.csv')
+passive_jamming1 = pd.read_csv('data/passive-gaussian-jamming/2412mhz_jamming_12dbm_gaussiannoise_1.csv')
+passive_jamming2 = pd.read_csv('data/passive-gaussian-jamming/2412mhz_jamming_9dbm_gaussiannoise_6.csv')
+passive_jamming3 = pd.read_csv('data/passive-gaussian-jamming/2412mhz_jamming_6dbm_gaussiannoise_13.csv')
 
 # Cleaning and visualizing the data
 def visualize_examples():
@@ -78,17 +72,12 @@ def visualize_examples():
     jamming_test2 = jamming_test.drop('base_pwr_db', axis=1)
     sns.lineplot(jamming_test2)
     plt.title('Jamming example at 5.8 GHz')
-    plt.show()
+    
 
     benign_test = benign_1.drop(['freq1', 'base_pwr_db'], axis=1)
     sns.lineplot(benign_test)
     plt.title('Benign jamming at 5.8 GHz')
-    plt.show()
-
-    return plt
-
-visualize_examples()
-
+    
 # Logistic regression model with visualizations
 def active_prediction_model():
     
@@ -121,7 +110,7 @@ def active_prediction_model():
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.title('Confusion Matrix of Active Scans')
-    plt.show()
+    
 
     accuracy = accuracy_score(y_test, combined_y_pred)
     precision = precision_score(y_test, combined_y_pred)
@@ -163,7 +152,7 @@ def passive_prediction_model():
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.title('Confusion Matrix of Passive Scans')
-    plt.show()
+    
 
     accuracy_passive = accuracy_score(y_test_passive, passive_y_pred)
     precision_passive = precision_score(y_test_passive, passive_y_pred)
@@ -172,10 +161,35 @@ def passive_prediction_model():
 
     return accuracy_passive, precision_passive, recall_passive, f1_passive
 
+def hypothesis_test_active():
+    active_benign_data = pd.concat([benign_1, benign_2, benign_3], ignore_index=True)
+    active_jamming_data = pd.concat([jamming_1, jamming_2, jamming_3], ignore_index=True)
+
+    active_benign_rssi = active_benign_data['rssi']
+    active_jamming_rssi = active_jamming_data['rssi']
+
+    t_stat, p_value = stats.ttest_ind(active_benign_rssi, active_jamming_rssi)
+
+    print(f'Active RSSI T-Statistic: {t_stat}')
+    print(f'Active RSSI P-Value: {p_value}')
+
+def hypothesis_test_passive():
+    passive_benign_data = pd.concat([passive_benign1, passive_benign2, passive_benign_3], ignore_index=True)
+    passive_jamming_data = pd.concat([passive_jamming1, passive_jamming2, passive_jamming3], ignore_index=True)
+
+    passive_benign_rssi = passive_benign_data['rssi']
+    passive_jamming_rssi = passive_jamming_data['rssi']
+
+    t_stat, p_value = stats.ttest_ind(passive_benign_rssi, passive_jamming_rssi)
+
+    print(f'Passive RSSI T-Statistic: {t_stat}')
+    print(f'Passive RSSI T-Statistic: {p_value}')
+
+
 active_metrics = active_prediction_model()
 passive_metrics = passive_prediction_model()
 
-# Print metrics
+# Print metrics from above models
 print("Active Metrics:")
 print(f"Accuracy: {active_metrics[0]: }")
 print(f"Precision: {active_metrics[1]: }")
@@ -190,4 +204,10 @@ print(f"F1 Score: {passive_metrics[3]: }")
 
 
 if __name__ == "__main__":
+    
     streamlit_app()
+    visualize_examples()
+    active_prediction_model()
+    passive_prediction_model()
+    hypothesis_test_active()
+    hypothesis_test_passive()
