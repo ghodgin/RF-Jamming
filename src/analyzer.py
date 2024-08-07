@@ -109,8 +109,10 @@ def streamlit_app():
             st.write("Is this signal being maliciously jammed?")
             st.write("HINT: remember RSSI!")
 
+            # Adding columns for game
             col1, col2 = st.columns(2)
             
+            # Yes / no buttons for visualization game
             with col1:
                 if st.button("Yes"):
                     if correct_options[selected_name]:
