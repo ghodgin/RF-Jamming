@@ -8,10 +8,9 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from scipy import stats
 import streamlit as st
 
-
-# Visualizes signal in streamlit app
-def visualize_signal(data):
-    st.line_chart(data)
+# Made by Greg Hodgin
+# Prediction model for maliciously jammed signals, as well as a deployed streamlit application
+# Capstone project
 
 # Streamlit application
 def streamlit_app():
@@ -90,7 +89,7 @@ def streamlit_app():
         }
 
         # User selects a CSV to look at
-        selected_name = st.selectbox("Select a signal", list(file_options.keys()))
+        selected_name = st.selectbox("Select a signal", list(file_options))
         selected_file = file_options[selected_name]
         
         if selected_file:
@@ -104,12 +103,12 @@ def streamlit_app():
 
             # Visualizes the signal
             st.write("Signal Visualization")
-            visualize_signal(cleaned_data)
+            st.line_chart(cleaned_data)
 
             st.write("Is this signal being maliciously jammed?")
             st.write("HINT: remember RSSI!")
 
-            # Adding two columns for game
+            # Adding two columns for yes / no buttons
             col1, col2 = st.columns(2)
             
             # Yes / no buttons for visualization game
