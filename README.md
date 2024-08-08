@@ -14,10 +14,10 @@ The RF spectrum plays a pivotal role in modern communications, and with the incr
 
 ## Hypothesis
 ## Null Hypothesis
-- Active scan jamming techniques are as difficult to identify and classify as passive scan techniques.
+- Received Signal Strength Indicator (RSSI) is NOT a good indicator of malicious jamming
 
 ## Alternate Hypothesis
-- Active scan jamming techniques are easier to identify and classify than passive scan techniques.
+- Received Signal Strength Indicator (RSSI) is a good indicator of whether or not a signal is being maliciously jammed or not.
 
 ## The Data
 Data Overview: 
@@ -46,6 +46,28 @@ Data Features:
 ![Figure_3](images/Figure_3.png)
 ![Figure_4](images/Figure_4.png)
 
+## Metrics
+The output from the tests are as follows:
+
+Active Metrics:
+- Accuracy:  0.96
+- Precision:  0.98
+- Recall:  0.96
+- F1 Score:  0.97
+
+Passive Metrics:
+- Accuracy:  0.90
+- Precision:  0.90
+- Recall:  0.91
+- F1 Score:  0.91
+
+Hypothesis test on RSSI
+- Active RSSI T-Statistic: -373.3301409744007
+- Active RSSI P-Value: 0.0
+
+- Passive RSSI T-Statistic: -57.16301338058486
+- Passive RSSI T-Statistic: 0.0
+
 ## Conclusion
 
-After analyzing the metrics from the prediction model, I would reject the null hypothesis. It is easier to detect Active jamming in real world conditions, compared to Passive jamming techniques. This means that if someone wanted to maliciously 'attack' a frequency, they would be better off focusing their efforts into passive methods. This also suggests that people who are looking for disturbances on their own frequencies, that a good first step would be to look out for any passive scans on the same frequency. 
+After analyzing the metrics and visualizations, it is clear that the logisitic regression model used is very accurate in predicting if signals from this dataset are being maliciously jammed or not. Additionally, the model also shows that it can predict the active gaussian jamming easier than the passive, though not by a large margin. (The active jamming accuracy was 96%, whereas the passive jamming accuracy was 90%.) This leads into the hypothesis test, where I tested to see if the RSSI (Received signal strength indicator) was a good indicator of whether or not a signal is being maliciously jammed. Both tests show that there is a clear relationship in increased RSSI being a tell-tell sign of a signal being maliciously jammed, which is also visualized in the examples above. With all of this being said, we can reject the null hypothesis of RSSI not being a good indicator of malicious jamming. 

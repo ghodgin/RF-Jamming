@@ -8,7 +8,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from scipy import stats
 import streamlit as st
 
-# Made by Greg Hodgin
 # Prediction model for maliciously jammed signals, as well as a deployed streamlit application
 # Capstone project
 
