@@ -9,7 +9,7 @@ from scipy import stats
 import streamlit as st
 
 
-# Visualizes signal
+# Visualizes signal in streamlit app
 def visualize_signal(data):
     st.line_chart(data)
 
@@ -61,7 +61,7 @@ def streamlit_app():
         # List of csv selections
         file_options = {
             "Signal 1" : "data/active-gaussian-jamming/5805mhz_jamming_10dbm_gaussiannoise_1.csv",
-            "Signal 2" : "streamlit_appdata/active-gaussian-jamming/5805mhz_jamming_neg10dbm_gaussiannoise_9.csv",
+            "Signal 2" : "data/active-gaussian-jamming/5805mhz_jamming_neg10dbm_gaussiannoise_9.csv",
             "Signal 3" : "data/active-gaussian-jamming/5805mhz_jamming_0dbm_gaussiannoise_28.csv",
             "Signal 4" : "data/active-benign-background/5ghz_activescan_background_loc1_1.csv",
             "Signal 5" : "data/active-benign-background/5ghz_activescan_background_loc2_35.csv",
@@ -90,7 +90,7 @@ def streamlit_app():
         }
 
         # User selects a CSV to look at
-        selected_name = st.selectbox("Select a CSV file", list(file_options.keys()))
+        selected_name = st.selectbox("Select a signal", list(file_options.keys()))
         selected_file = file_options[selected_name]
         
         if selected_file:
@@ -109,7 +109,7 @@ def streamlit_app():
             st.write("Is this signal being maliciously jammed?")
             st.write("HINT: remember RSSI!")
 
-            # Adding columns for game
+            # Adding two columns for game
             col1, col2 = st.columns(2)
             
             # Yes / no buttons for visualization game
@@ -239,6 +239,7 @@ def passive_prediction_model():
 
     return accuracy_passive, precision_passive, recall_passive, f1_passive
 
+# Hypothesis tests
 def hypothesis_test_active():
     active_benign_data = pd.concat([benign_1, benign_2, benign_3], ignore_index=True)
     active_jamming_data = pd.concat([jamming_1, jamming_2, jamming_3], ignore_index=True)
