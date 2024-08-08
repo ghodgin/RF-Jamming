@@ -48,9 +48,25 @@ def streamlit_app():
         st.image('images/Figure_2.png')
         st.image('images/Figure_3.png')
         st.image('images/Figure_4.png')
-
+        st.write('## Metrics')
+        st.write('The output from the prediction model and hypothesis tests are as follows:')
+        st.write('Active Metrics:')
+        st.write('- Accuracy: 0.96')
+        st.write('- Precision: 0.98')
+        st.write('- Recall: 0.96')
+        st.write('- F1 Score: 0.97')
+        st.write('Passive Metrics:')
+        st.write('- Accuracy: 0.90')
+        st.write('- Precision: 0.90')
+        st.write('- Recall: 0.91')
+        st.write('- F1 Score: 0.91')
+        st.write('Hypothesis tests on RSSI')
+        st.write('- Active RSSI T-Statistic: -373.330')
+        st.write('- Active RSSI P-Value: 0.0')
+        st.write('- Passive RSSI T-Statistic: -57.163')
+        st.write('- Passive RSSI P-Value: 0.0')
         st.write('## Conclusion')
-        st.write('After analyzing the metrics from the prediction model, I would reject the null hypothesis. It is easier to detect Active jamming in real world conditions, compared to Passive jamming techniques. This means that if someone wanted to maliciously attack a frequency, they would be better off focusing their efforts into passive methods. This also suggests that people who are looking for disturbances on their own frequencies, that a good first step would be to look out for any passive scans on the same frequency.')
+        st.write('After analyzing the metrics and visualizations, it is clear that the logisitic regression model used is very accurate in predicting if signals from this dataset are being maliciously jammed or not. Additionally, the model also shows that it can predict the active gaussian jamming easier than the passive, though not by a large margin. (The active jamming accuracy was 96%, whereas the passive jamming accuracy was 90%.) This leads into the hypothesis test, where I tested to see if the RSSI (Received signal strength indicator) was a good indicator of whether or not a signal is being maliciously jammed. Both tests show that there is a clear relationship in increased RSSI being a tell-tell sign of a signal being maliciously jammed, which is also visualized in the examples above. With all of this being said, we can reject the null hypothesis of RSSI not being a good indicator of malicious jamming.')
 
 
     elif page == "Visualize Data":
