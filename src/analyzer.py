@@ -148,12 +148,13 @@ def visualize_examples():
     jamming_test = jamming_1.drop('freq1', axis=1)
     jamming_test2 = jamming_test.drop('base_pwr_db', axis=1)
     sns.lineplot(jamming_test2)
-    plt.title('Jamming example at 5.8 GHz')
-    
+    plt.title('Malicious Jamming Example at 5.8 GHz')
+    # plt.show() (remove # if needed)
 
     benign_test = benign_1.drop(['freq1', 'base_pwr_db'], axis=1)
     sns.lineplot(benign_test)
     plt.title('Benign jamming at 5.8 GHz')
+    # plt.show()
     
 # Logistic regression model with visualizations
 def active_prediction_model():
