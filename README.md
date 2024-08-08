@@ -41,6 +41,10 @@ Data Features:
 
 
 ## Visualizations
+![Figure_1](images/Figure_1.png)
+![Figure_2](images/Figure_2.png)
+![Figure_3](images/Figure_3.png)
+![Figure_4](images/Figure_4.png)
 
 ## Conclusion
 
