@@ -2,6 +2,10 @@
 
 ![rf signals gif](https://www.compasseur.com/wp-content/uploads/2023/06/3_livecheck.gif)
 
+For a more interactive experience, click [here](https://ghodgin-rf-jamming-srcanalyzer-54oegh.streamlit.app) to go to this projects streamlit app.
+
+Dataset derived from Dania Herzalla on kaggle, linked [here](https://www.kaggle.com/datasets/daniaherzalla/radio-frequency-jamming)
+
 ## Table of contents
 1. [Overview](#overview)
 2. [Hypothesis](#hypothesis)
