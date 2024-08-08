@@ -11,7 +11,8 @@ Dataset derived from Dania Herzalla on kaggle, linked [here](https://www.kaggle.
 2. [Hypothesis](#hypothesis)
 3. [The Data](#the-data)
 4. [Visualizations](#visualizations)
-5. [Conclusion](#conclusion)
+5. [Metrics](#metrics)
+6. [Conclusion](#conclusion)
 
 ## Overview
 The RF spectrum plays a pivotal role in modern communications, and with the increasing prevalence of malicious RF jamming attacks, the reliability and security of wireless systems are under significant threat. To safeguard your critical frequencies, it is essential to accurately detect and identify any disruptions, whether caused by deliberate interference or other factors. This requires robust monitoring and analysis to ensure that your communications remain secure and uninterrupted.
