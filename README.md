@@ -26,7 +26,7 @@ The RF spectrum plays a pivotal role in modern communications, and with the incr
 
 ## The Data
 Data Overview: 
-- The data was presented in a 14.5 GB zip file, with 96k spectral scans. (5k active scans, 91k passive scans)
+- The data was presented in a 2 GB zip file, with 96k spectral scans. (5k active scans, 91k passive scans)
 - Format: .csv
 - Captures instances of RF jamming (malicious) and non-jamming (benign) scenarios using a Raspberry Pi4 device 
 - 'Jamming' and 'floor' data were collected in an RF chamber to ensure controlled conditions
